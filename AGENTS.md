@@ -2,6 +2,9 @@
 
 Handoff note for the agent taking over this project. Read this first.
 
+> **Current task:** review `STRATEGY.md` — the owner's approved outbound plan.
+> The review brief is at the top of that file. Review only; do not execute.
+
 > **This repository is PUBLIC.** Never commit a live email address, phone
 > number, prospect name, API key, or contact list to it. Live identities belong
 > in `pm-pipeline/config/identities.yml`, which is gitignored. Lead data lives

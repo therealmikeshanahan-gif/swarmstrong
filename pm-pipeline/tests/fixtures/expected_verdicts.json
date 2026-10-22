@@ -1,0 +1,50 @@
+{
+  "autoreply_ooo.eml": {
+    "alert": false,
+    "kind": "autoreply",
+    "optOut": false,
+    "responder": "pm@example-realty.com"
+  },
+  "bounce_dsn.eml": {
+    "alert": false,
+    "kind": "bounce",
+    "optOut": false,
+    "responder": "mailer-daemon@mx.example.com"
+  },
+  "forwarded_alert_to_mike.eml": {
+    "alert": false,
+    "kind": "outbound_self",
+    "optOut": false,
+    "responder": "mike@armoredglassgrants.com"
+  },
+  "outbound_duke_step4.eml": {
+    "alert": false,
+    "kind": "outbound_self",
+    "optOut": false,
+    "responder": "clark@teamarmoredglass.com"
+  },
+  "outbound_moss_step4.eml": {
+    "alert": false,
+    "kind": "outbound_self",
+    "optOut": false,
+    "responder": "shanahan@teamarmoredglass.com"
+  },
+  "reply_adat_elohim.eml": {
+    "alert": true,
+    "kind": "human_reply",
+    "optOut": false,
+    "responder": "gmanzur@adatelohim.com"
+  },
+  "reply_canyons_church.eml": {
+    "alert": true,
+    "kind": "human_reply",
+    "optOut": false,
+    "responder": "info@canyonschurchsd.com"
+  },
+  "reply_truebinding_optout.eml": {
+    "alert": true,
+    "kind": "human_reply",
+    "optOut": true,
+    "responder": "drivera@truebinding.com"
+  }
+}

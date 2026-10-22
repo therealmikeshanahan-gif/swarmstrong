@@ -90,13 +90,13 @@ for (const name of fixtures) {
 
 // The two cases worth naming explicitly, because they are the bug and its trap.
 
-test('the Oct 12 Duke message never alerts', () => {
-  const v = classifyReply(parseEml(readFileSync(join(FIXTURES, 'outbound_duke_step4.eml'), 'utf8')));
+test('the Oct 12 outbound message never alerts', () => {
+  const v = classifyReply(parseEml(readFileSync(join(FIXTURES, 'outbound_step4_a.eml'), 'utf8')));
   assert.equal(v.kind, 'outbound_self');
   assert.equal(v.alert, false);
 });
 
 test('our own opt-out line is not read as the prospect opting out', () => {
-  const v = classifyReply(parseEml(readFileSync(join(FIXTURES, 'outbound_duke_step4.eml'), 'utf8')));
+  const v = classifyReply(parseEml(readFileSync(join(FIXTURES, 'outbound_step4_a.eml'), 'utf8')));
   assert.equal(v.optOut, false);
 });

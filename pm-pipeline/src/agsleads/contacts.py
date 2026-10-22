@@ -49,7 +49,7 @@ def normalize_phone(raw: str | None) -> str | None:
 def normalize_company(name: str | None) -> str:
     """Collapse a company name to a dedupe key.
 
-    "The REMM Group, AMO" and "REMM Group Inc." both become "remm".
+    "The Example Group, AMO" and "Example Group Inc." both become "example".
     """
     if not name:
         return ""

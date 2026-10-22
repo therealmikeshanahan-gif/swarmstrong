@@ -11,10 +11,10 @@ On 2026-10-12 the watcher fired six `NEW LEAD REPLY` alerts for the OC-LA
 Property Managers campaign. Every one was our own step-4 follow-up:
 
 ```
-From: clark@teamarmoredglass.com      <- us
-To:   info@dukepm.com                 <- the prospect
+From: sender1@example-outreach.com      <- us
+To:   info@example-propmgmt.com                 <- the prospect
 Subject: Re: Who handles entry glass maintenance?
-"Last follow-up from me... CA Contractor License #997737"
+"Last follow-up from me... CA Contractor License #000000"
 ```
 
 The sequence sends step 4 in-thread, so the subject carried `Re:` and the
@@ -27,14 +27,14 @@ failure looked like a working campaign for six weeks.
 ### Drop it into the existing watcher
 
 The watcher itself isn't in this repo — it runs under
-`mike@armoredglassgrants.com`. Wherever it decides "this is a reply", call this
+`alerts@example-grants.com`. Wherever it decides "this is a reply", call this
 first and bail on anything that isn't `human_reply`:
 
 ```python
 from agsleads.identity import Identities
 from agsleads.reply_guard import classify_raw
 
-IDENTITIES = Identities.load("config/identities.yml")
+IDENTITIES = Identities.load("config")
 
 verdict = classify_raw(raw_rfc822_bytes, IDENTITIES)
 if not verdict.alert:
@@ -90,7 +90,7 @@ them.
 | Tier | Who | Role inbox |
 |---|---|---|
 | A | Institutional (CBRE, JLL, Greystar, Irvine Co) | reject |
-| B | Regional commercial — the proven segment (Coreland, NAI, REMM, Moss) | reject |
+| B | Regional commercial — the proven segment (the firms already closing with us) | reject |
 | C | HOA / community association — best repeat bet, untouched | reject |
 | D | Multifamily / apartment operators | reject |
 | E | Boutique, 1-10 properties | allow + flag (info@ is often the owner) |
@@ -98,8 +98,8 @@ them.
 
 ### The rule that matters
 
-No role inboxes on tiers A-D. `info@dukepm.com` and
-`management@mosscompany.com` are why 259 sends returned nothing.
+No role inboxes on tiers A-D. `info@example-propmgmt.com` and
+`management@example-realty2.com` are why 259 sends returned nothing.
 
 **Watch the bounce rate as a quality alarm.** That campaign bounced 0.4%, which
 looks excellent and was actually the tell: front-desk catch-alls accept
@@ -113,8 +113,8 @@ PYTHONPATH=src python -m pytest tests/ -q
 ```
 
 50 tests. The reply-guard fixtures are real messages from the campaigns — the
-two `outbound_*.eml` files are the exact ones that produced the false Duke and
-Moss alerts, and `reply_canyons_church.eml` is a real high-intent reply that
+two `outbound_*.eml` files are the exact ones that produced the two false
+alerts, and `reply_from_role_inbox.eml` is a real high-intent reply that
 came *from* a role inbox, which is why a reply is never suppressed on address
 shape.
 

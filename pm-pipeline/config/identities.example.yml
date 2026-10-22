@@ -6,29 +6,29 @@
 # add it to Instantly, or the false alerts come back.
 
 owned_domains:
-  - teamarmoredglass.com
-  - armoredglassgrants.com
-  - armoredglasssolutions.com
+  - example-outreach.com
+  - example-grants.com
+  - example-main.com
 
 owned_addresses:
   # cold-outreach mailboxes
-  - clark@teamarmoredglass.com
-  - clark.shanahan@teamarmoredglass.com
-  - shanahan@teamarmoredglass.com
-  - julia@armoredglassgrants.com
-  - mike@armoredglassgrants.com
+  - sender1@example-outreach.com
+  - sender2@example-outreach.com
+  - sender3@example-outreach.com
+  - persona@example-grants.com
+  - alerts@example-grants.com
   # personal / internal — these show up in forwarded threads
-  - armorglass@icloud.com
-  - clarkshanahan@icloud.com
-  - therealmikeshanahan@gmail.com
-  - juliapaquette@yahoo.com
-  - juliacpaquette@yahoo.com
-  - julcpaq@gmail.com
+  - owner1@example-personal.com
+  - owner2@example-personal.com
+  - owner3@example-personal.com
+  - caller2@example-personal.com
+  - caller1@example-personal.com
+  - caller3@example-personal.com
 
 # Phrases that only ever appear in OUR copy. Backstop for the case where a
 # forward or a misconfigured mailbox strips the real From header.
 own_content_markers:
-  - "CA Contractor License #997737"
+  - "CA Contractor License #000000"
   - "Reply \"no thanks\" to opt out"
-  - "21515 Hawthorne Blvd, Suite 200"
+  - "1 Example Blvd, Suite 100"
   - "Last follow-up from me"

@@ -6,10 +6,10 @@ On 2026-10-12 the reply watcher fired six "NEW LEAD REPLY" alerts for the
 OC-LA Property Managers campaign. Every one of them was our own step-4
 follow-up, sent FROM one of our mailboxes TO the prospect:
 
-    From: clark@teamarmoredglass.com
-    To:   info@dukepm.com
+    From: sender1@example-outreach.com
+    To:   info@example-propmgmt.com
     Subject: Re: Who handles entry glass maintenance?
-    "Last follow-up from me... CA Contractor License #997737"
+    "Last follow-up from me... CA Contractor License #000000"
 
 Because the sequence sends step 4 in-thread, the subject carried "Re:" and the
 watcher took it for an inbound reply. It then classified our own copy as

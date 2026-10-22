@@ -2,10 +2,10 @@
 #
 # Rejecting these when BUILDING a list is the single rule that would have
 # prevented the OC-LA Property Managers result: 259 emails sent to addresses
-# like info@dukepm.com and management@mosscompany.com, 0 human replies.
+# like info@example-propmgmt.com and management@example-realty2.com, 0 human replies.
 #
 # NOTE — this applies to list building only. Never suppress an inbound REPLY
-# because it came from a role address: info@canyonschurchsd.com sent one of the
+# because it came from a role address: info@example-church.org sent one of the
 # highest-intent replies the grant campaign ever got. At a 4-person church a
 # human reads info@; at a 50-person management firm nobody does.
 #

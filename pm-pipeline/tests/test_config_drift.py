@@ -12,9 +12,11 @@ from pathlib import Path
 
 import yaml
 
+from agsleads.identity import Identities
+
 ROOT = Path(__file__).resolve().parents[1]
 GS = (ROOT / "apps-script" / "replyGuard.gs").read_text()
-CONF = yaml.safe_load((ROOT / "config" / "identities.yml").read_text())
+CONF = yaml.safe_load(Identities.resolve(ROOT / "config").read_text())
 
 
 def js_array(name: str) -> list[str]:
@@ -46,7 +48,7 @@ def test_golden_matches_current_python():
     from agsleads.reply_guard import classify_raw
 
     golden = json.loads((ROOT / "tests" / "fixtures" / "expected_verdicts.json").read_text())
-    identities = Identities.load(ROOT / "config" / "identities.yml")
+    identities = Identities.load(ROOT / "config")
 
     for name, expected in golden.items():
         verdict = classify_raw((ROOT / "tests" / "fixtures" / name).read_bytes(), identities)

@@ -24,7 +24,7 @@ var WATCH_QUERY = 'in:anywhere -in:drafts';
 /** Who gets paged on a real human reply. First one should be a shared inbox,
  *  not a personal one — a single personal inbox is how replies got missed. */
 var ALERT_EMAILS = [
-  'therealmikeshanahan@gmail.com'
+  'owner3@example-personal.com'
 ];
 
 /** Optional. Carrier email-to-SMS gateway, e.g. '7145551234@txt.att.net'.
@@ -213,20 +213,20 @@ function saveSeen(props, seen) {
 function selfCheck() {
   var cases = [
     {
-      name: 'our own step-4 to Duke (fired a false alert on Oct 12)',
+      name: 'our own step-4 follow-up (fired a false alert on Oct 12)',
       fields: {
-        from: 'clark@teamarmoredglass.com',
-        to: 'info@dukepm.com',
+        from: 'sender1@example-outreach.com',
+        to: 'info@example-propmgmt.com',
         subject: 'Re: Who handles entry glass maintenance?',
-        body: 'Last follow-up from me. Julia Shanahan CA Contractor License #997737 Reply "no thanks" to opt out.'
+        body: 'Last follow-up from me. Jane Example CA Contractor License #000000 Reply "no thanks" to opt out.'
       },
       expect: 'outbound_self'
     },
     {
       name: 'real human reply',
       fields: {
-        from: 'gmanzur@adatelohim.com',
-        to: 'julia@armoredglassgrants.com',
+        from: 'dmorales@example-temple.org',
+        to: 'persona@example-grants.com',
         subject: 'Re: security grant',
         body: 'Hello Julia, I would love a walk through to discuss the options.'
       },
@@ -236,7 +236,7 @@ function selfCheck() {
       name: 'out of office',
       fields: {
         from: 'pm@example.com',
-        to: 'clark@teamarmoredglass.com',
+        to: 'sender1@example-outreach.com',
         subject: 'Automatic reply: Who handles entry glass maintenance?',
         autoSubmitted: 'auto-replied',
         body: 'I am currently out of the office.'
@@ -247,7 +247,7 @@ function selfCheck() {
       name: 'bounce',
       fields: {
         from: 'MAILER-DAEMON@mx.example.com',
-        to: 'clark@teamarmoredglass.com',
+        to: 'sender1@example-outreach.com',
         subject: 'Undeliverable: Who handles entry glass maintenance?',
         body: '550 5.1.1 Address not found.'
       },

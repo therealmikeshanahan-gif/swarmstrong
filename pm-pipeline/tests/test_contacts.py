@@ -26,8 +26,8 @@ ROLE_INBOXES = load_role_inboxes(ROOT / "config" / "role_inboxes.txt")
 @pytest.mark.parametrize(
     "email",
     [
-        "info@dukepm.com",          # real, from the failed campaign
-        "management@mosscompany.com",  # real, from the failed campaign
+        "info@example-propmgmt.com",          # real, from the failed campaign
+        "management@example-realty2.com",  # real, from the failed campaign
         "leasing@example.com",
         "admin@example.com",
         "info.la@example.com",      # decorated variant
@@ -42,11 +42,11 @@ def test_role_inboxes_are_caught(email):
 @pytest.mark.parametrize(
     "email",
     [
-        "gmanzur@adatelohim.com",
-        "sharon.w@cc-sd.org",
-        "jtisdale@remmgroup.com",
-        "nabend@remmgroup.com",
-        "mshepherd@manhattan-plaza.com",
+        "dmorales@example-temple.org",
+        "sgrant@example-cc.org",
+        "jtisdale@example-regional.com",
+        "nabend@example-regional.com",
+        "mshepherd@example-plaza.com",
     ],
 )
 def test_named_people_pass(email):
@@ -54,7 +54,7 @@ def test_named_people_pass(email):
 
 
 def test_strict_tier_rejects_role_inbox():
-    c = Contact(company="Duke Property Management", tier="B", email="info@dukepm.com")
+    c = Contact(company="Example Property Management", tier="B", email="info@example-propmgmt.com")
     c.screen(ROLE_INBOXES)
     assert c.rejected_reason == "role inbox"
     assert c.mailable is False
@@ -69,8 +69,8 @@ def test_tier_e_allows_role_inbox_with_a_flag():
 
 
 def test_mailable_requires_verification():
-    c = Contact(company="REMM Group", tier="B", contact_name="Jordan Tisdale",
-                email="jtisdale@remmgroup.com")
+    c = Contact(company="Example Group", tier="B", contact_name="J. Tisdale",
+                email="jtisdale@example-regional.com")
     c.screen(ROLE_INBOXES)
     assert c.mailable is False  # not verified yet
     c.email_verified = True
@@ -82,11 +82,11 @@ def test_mailable_requires_verification():
 @pytest.mark.parametrize(
     "raw,expected",
     [
-        ("310-657-4256", "(310) 657-4256"),
-        ("(949) 398-8750", "(949) 398-8750"),
-        ("1-818-990-5999", "(818) 990-5999"),
-        ("714.210.6750", "(714) 210-6750"),
-        ("+1 (858) 451-1200", "(858) 451-1200"),
+        ("310-555-0101", "(310) 555-0101"),
+        ("(949) 555-0102", "(949) 555-0102"),
+        ("1-818-555-0103", "(818) 555-0103"),
+        ("714.555.0104", "(714) 555-0104"),
+        ("+1 (858) 555-0105", "(858) 555-0105"),
         ("555", None),
         ("", None),
         (None, None),
@@ -98,9 +98,11 @@ def test_normalize_phone(raw, expected):
 
 
 def test_company_key_collapses_suffixes():
-    assert normalize_company("The REMM Group, AMO") == normalize_company("REMM Group Inc.")
-    assert normalize_company("Moss & Company") == normalize_company("Moss and Company") or True
-    assert normalize_company("Duke Property Management, Inc.") == "duke property management"
+    # Same firm written two ways must produce one key, or it gets mailed twice.
+    assert normalize_company("The Example Group, AMO") == normalize_company("Example Group Inc.")
+    assert normalize_company("Example Property Management, Inc.") == "example property management"
+    assert normalize_company("  EXAMPLE   Realty, LLC ") == "example realty"
+    assert normalize_company("Example Realty Co") == "example realty"
 
 
 # --- dedupe -----------------------------------------------------------------
@@ -117,22 +119,22 @@ def test_dedupe_drops_repeat_emails():
 
 def test_dedupe_excludes_prior_campaigns():
     """A contact already mailed by the nonprofit campaign must not be re-mailed."""
-    rows = [Contact(company="Temple", tier="C", email="gmanzur@adatelohim.com")]
-    result = dedupe(rows, frozenset({"gmanzur@adatelohim.com"}))
+    rows = [Contact(company="Temple", tier="C", email="dmorales@example-temple.org")]
+    result = dedupe(rows, frozenset({"dmorales@example-temple.org"}))
     assert result.kept == []
     assert result.dropped[0].rejected_reason == "already in a prior campaign"
 
 
 def test_dedupe_keeps_distinct_people_at_one_company():
     rows = [
-        Contact(company="REMM Group", tier="B", email="jtisdale@remmgroup.com"),
-        Contact(company="REMM Group", tier="B", email="nabend@remmgroup.com"),
+        Contact(company="Example Group", tier="B", email="jtisdale@example-regional.com"),
+        Contact(company="Example Group", tier="B", email="nabend@example-regional.com"),
     ]
     assert len(dedupe(rows).kept) == 2
 
 
 def test_phone_only_contact_survives_for_the_call_list():
-    rows = [Contact(company="Athena Management", tier="B", phone="949-398-8750")]
+    rows = [Contact(company="Example Management", tier="B", phone="949-555-0102")]
     result = dedupe(rows)
     assert len(result.kept) == 1
     assert result.kept[0].callable_ is True
@@ -142,14 +144,14 @@ def test_phone_only_contact_survives_for_the_call_list():
 # --- export -----------------------------------------------------------------
 
 def test_export_splits_views(tmp_path):
-    verified = Contact(company="REMM Group", tier="B", contact_name="Jordan Tisdale",
-                       title="Assistant Property Manager", email="jtisdale@remmgroup.com",
-                       phone="714-974-1010", city="Irvine", county="Orange")
+    verified = Contact(company="Example Group", tier="B", contact_name="J. Tisdale",
+                       title="Assistant Property Manager", email="jtisdale@example-regional.com",
+                       phone="714-555-0106", city="Irvine", county="Orange")
     verified.email_verified = True
-    phone_only = Contact(company="Athena Management", tier="B", phone="949-398-8750",
+    phone_only = Contact(company="Example Management", tier="B", phone="949-555-0102",
                          city="Irvine", county="Orange")
-    rejected = Contact(company="Duke PM", tier="B", email="info@dukepm.com",
-                       phone="310-657-4256")
+    rejected = Contact(company="Example PM", tier="B", email="info@example-propmgmt.com",
+                       phone="310-555-0101")
     rejected.screen(ROLE_INBOXES)
 
     counts = write_all([verified, phone_only, rejected], tmp_path)
@@ -160,4 +162,4 @@ def test_export_splits_views(tmp_path):
 
     call_csv = (tmp_path / "call_list.csv").read_text()
     # Unreachable-by-email contacts sort first — a call is the only way in.
-    assert call_csv.index("Athena") < call_csv.index("Jordan Tisdale")
+    assert call_csv.index("Example Management") < call_csv.index("J. Tisdale")

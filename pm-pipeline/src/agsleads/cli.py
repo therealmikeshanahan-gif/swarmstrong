@@ -102,7 +102,7 @@ def cmd_enrich(args: argparse.Namespace) -> None:
 
 
 def cmd_check_reply(args: argparse.Namespace) -> None:
-    identities = Identities.load(CONFIG / "identities.yml")
+    identities = Identities.load(CONFIG)
     raw = sys.stdin.buffer.read()
     v = classify_raw(raw, identities)
     print(f"kind     : {v.kind}")

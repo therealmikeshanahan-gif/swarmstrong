@@ -11,8 +11,8 @@ receives the mail and runs every 5 minutes.
 
 ## Install (about 5 minutes)
 
-1. Sign in as the account that receives the Instantly replies — the Canyons
-   alert pointed at `grants@armoredglassgrants.com`, so confirm which mailbox
+1. Sign in as the account that receives the Instantly replies — the lead
+   alert pointed at `replies@example-grants.com`, so confirm which mailbox
    that actually is before starting.
 2. Go to <https://script.google.com> → **New project**. Name it `AGS Reply Watcher`.
 3. Create two files and paste in the contents of:
@@ -23,7 +23,7 @@ receives the mail and runs every 5 minutes.
      one.** A single personal inbox is how replies got missed for 8 days.
    - `WATCH_QUERY` — narrow it if the account carries unrelated mail.
 5. Run `selfCheck()` from the editor. It should log four PASS lines, including
-   the Oct 12 Duke message classified `outbound_self`. Authorize when prompted.
+   the Oct 12 outbound message classified `outbound_self`. Authorize when prompted.
 6. Run `setup()` once. Creates the labels and installs the 5-minute trigger.
 7. Optional, under **Project Settings → Script Properties**:
    - `SMS_GATEWAY` — your carrier's email-to-SMS address, e.g.

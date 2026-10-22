@@ -2,7 +2,7 @@
 
 Every fixture here is a real message from the campaigns, not a hypothetical.
 The two `outbound_*` fixtures are the exact messages that produced bogus
-"NEW LEAD REPLY" alerts for Duke Property Management and Moss & Company.
+"NEW LEAD REPLY" alerts for Example Property Management and Example Realty Co.
 """
 
 from pathlib import Path
@@ -14,7 +14,7 @@ from agsleads.reply_guard import classify_raw
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests" / "fixtures"
-IDENTITIES = Identities.load(ROOT / "config" / "identities.yml")
+IDENTITIES = Identities.load(ROOT / "config")
 
 
 def verdict_for(name: str):
@@ -25,7 +25,7 @@ def verdict_for(name: str):
 
 @pytest.mark.parametrize(
     "fixture",
-    ["outbound_duke_step4.eml", "outbound_moss_step4.eml"],
+    ["outbound_step4_a.eml", "outbound_step4_b.eml"],
 )
 def test_our_own_step4_is_never_a_lead(fixture):
     """These two fired false alerts on Oct 12. They must never alert again."""
@@ -41,14 +41,14 @@ def test_our_own_optout_line_is_not_read_as_an_optout():
     If direction were checked after opt-out detection we would mark our own
     prospects as opted out and silently burn the list.
     """
-    v = verdict_for("outbound_duke_step4.eml")
+    v = verdict_for("outbound_step4_a.eml")
     assert v.kind == "outbound_self"
     assert v.opt_out is False
 
 
 def test_forwarded_alert_does_not_loop():
     """The watcher's own alert mail must not be re-ingested as a new lead."""
-    v = verdict_for("forwarded_alert_to_mike.eml")
+    v = verdict_for("forwarded_alert_internal.eml")
     assert v.kind == "outbound_self"
     assert v.alert is False
 
@@ -56,25 +56,25 @@ def test_forwarded_alert_does_not_loop():
 # --- real replies must still get through ------------------------------------
 
 def test_real_human_reply_alerts():
-    v = verdict_for("reply_adat_elohim.eml")
+    v = verdict_for("reply_named_person.eml")
     assert v.kind == "human_reply"
     assert v.alert is True
-    assert v.responder == "gmanzur@adatelohim.com"
+    assert v.responder == "dmorales@example-temple.org"
 
 
 def test_role_inbox_reply_still_counts_as_human():
-    """info@canyonschurchsd.com sent a real, high-intent human reply.
+    """info@example-church.org sent a real, high-intent human reply.
 
     Role inboxes are bad targets when BUILDING a list, but a reply from one is
     still a human. Never suppress on the shape of the address.
     """
-    v = verdict_for("reply_canyons_church.eml")
+    v = verdict_for("reply_from_role_inbox.eml")
     assert v.kind == "human_reply"
     assert v.alert is True
 
 
 def test_optout_reply_is_flagged_and_still_surfaces():
-    v = verdict_for("reply_truebinding_optout.eml")
+    v = verdict_for("reply_optout.eml")
     assert v.kind == "human_reply"
     assert v.opt_out is True
 
@@ -98,12 +98,12 @@ def test_bounce_is_not_a_reply():
 @pytest.mark.parametrize(
     "address",
     [
-        "clark@teamarmoredglass.com",
-        "clark.shanahan@teamarmoredglass.com",
-        "shanahan@teamarmoredglass.com",
-        "julia@armoredglassgrants.com",
-        "anything@armoredglasssolutions.com",  # domain-level match
-        "CLARK@TeamArmoredGlass.com",  # case-insensitive
+        "sender1@example-outreach.com",
+        "sender2@example-outreach.com",
+        "sender3@example-outreach.com",
+        "persona@example-grants.com",
+        "anything@example-main.com",  # domain-level match
+        "SENDER1@Example-Outreach.com",  # case-insensitive
     ],
 )
 def test_owned_addresses(address):
@@ -113,10 +113,10 @@ def test_owned_addresses(address):
 @pytest.mark.parametrize(
     "address",
     [
-        "gmanzur@adatelohim.com",
-        "info@dukepm.com",
-        "sharon.w@cc-sd.org",
-        "notteamarmoredglass.com@evil.example",
+        "dmorales@example-temple.org",
+        "info@example-propmgmt.com",
+        "sgrant@example-cc.org",
+        "notexample-outreach.com@evil.example",
     ],
 )
 def test_outside_addresses(address):
@@ -129,6 +129,6 @@ def test_true_reply_count_for_oc_la_property_managers():
     Feed it every message we have from that campaign and confirm the guard
     reports zero real replies.
     """
-    campaign_messages = ["outbound_duke_step4.eml", "outbound_moss_step4.eml"]
+    campaign_messages = ["outbound_step4_a.eml", "outbound_step4_b.eml"]
     real = [v for v in map(verdict_for, campaign_messages) if v.is_real_reply]
     assert len(real) == 0

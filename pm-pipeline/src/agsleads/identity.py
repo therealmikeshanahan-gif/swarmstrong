@@ -32,9 +32,25 @@ class Identities:
     addresses: frozenset[str] = field(default_factory=frozenset)
     content_markers: tuple[str, ...] = ()
 
+    @staticmethod
+    def resolve(config_dir: str | Path) -> Path:
+        """Pick the real identity file, falling back to the committed example.
+
+        `identities.yml` holds live mailboxes and is deliberately NOT in version
+        control — this repo is public. `identities.example.yml` ships with
+        placeholder addresses so the tests run out of the box on a fresh clone.
+        Copy the example to `identities.yml` and fill in the real values on any
+        machine that actually runs the pipeline.
+        """
+        real = Path(config_dir) / "identities.yml"
+        return real if real.exists() else Path(config_dir) / "identities.example.yml"
+
     @classmethod
     def load(cls, path: str | Path) -> "Identities":
-        data = yaml.safe_load(Path(path).read_text()) or {}
+        path = Path(path)
+        if path.is_dir():
+            path = cls.resolve(path)
+        data = yaml.safe_load(path.read_text()) or {}
         return cls(
             domains=frozenset(d.lower().lstrip("@") for d in data.get("owned_domains", [])),
             addresses=frozenset(a.lower() for a in data.get("owned_addresses", [])),

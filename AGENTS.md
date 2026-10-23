@@ -72,7 +72,12 @@ failure looked like a working campaign for six weeks.
 - `tests/fixtures/*.eml` — structural copies of the real messages, including the
   two that produced the false alerts.
 
-### 3b. Lindy replacement — BUILT, not yet installed
+### 3b. Lindy replacement — SUPERSEDED, do not install
+
+> **2026-10-23: DOT now owns all reply handling.** Do not install this Apps
+> Script — two watchers on one inbox means duplicate alerts. It stays here as
+> the reference for the one rule DOT must also follow: **mail from any of our
+> own sending identities is outbound and never a lead.** That is the Oct 12 bug.
 
 Lindy was a credit-metered AI agent doing a cron job's work. Its credits ran out
 on 2026-10-16 and a lead that arrived that day may never have been called. **The
@@ -164,7 +169,7 @@ five or six days. The rates are fine; the throughput is not.
 Do **not** scale sending volume before reply intake works. Opportunities were
 already sitting unanswered; more volume just wastes more list.
 
-1. Restore intake (install §3b; confirm the reply mailbox first).
+1. Restore intake — **done 2026-10-23, DOT handles replies.** Verify item 1 in §8.
 2. Answer the overdue warm leads. Get the current list from Gmail — search
    `from:alerts@<grants domain> subject:"NEW LEAD"` and the dated "CEO Review"
    emails. **Several were 8–20 days overdue as of 2026-10-19.**
@@ -261,16 +266,13 @@ Three of these were never tracked, and their absence is why the program stalled:
 
 | # | Item | Blocked on |
 |---|---|---|
-| 1 | Install the Apps Script watcher | Which mailbox receives Instantly replies |
+| 1 | Confirm DOT ignores our own outbound mail (the Oct 12 bug) | Test DOT with one of our own step-4 follow-ups |
 | 2 | Answer overdue warm leads | Human decision; list is in Gmail |
 | 3 | Run the list build | 3 API keys + network access to the 3 blocked hosts |
 | 4 | Build the incident/crime feed | Nothing — specced, never started |
 | 5 | Load next batch before current campaign exhausts | List from #3 |
 | 6 | Stand up the evergreen nurture campaign | Instantly-side config |
-| 7 | A named human owner on the reply inbox | Human decision |
-
-Item 7 is not optional. The watcher guarantees a real reply is never hidden and
-never faked. It cannot make anyone answer within the hour.
+| 7 | ~~A named owner on the reply inbox~~ | **Done 2026-10-23 — DOT handles all replies** |
 
 ## 9. Known-good context
 

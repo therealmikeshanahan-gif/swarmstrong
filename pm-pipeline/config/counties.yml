@@ -1,0 +1,260 @@
+# Santa Rosa to the Mexican border — 29 counties, north to south.
+# Cities drive the search grid: every source is queried once per city per tier,
+# because statewide queries silently cap out long before they are complete.
+
+regions:
+  north_bay:
+    counties: [Sonoma, Napa, Marin, Solano]
+    cities:
+      - Santa Rosa
+      - Petaluma
+      - Rohnert Park
+      - Windsor
+      - Sonoma
+      - Napa
+      - American Canyon
+      - San Rafael
+      - Novato
+      - Mill Valley
+      - Larkspur
+      - Vallejo
+      - Fairfield
+      - Vacaville
+      - Benicia
+      - Suisun City
+
+  east_bay:
+    counties: [Contra Costa, Alameda]
+    cities:
+      - Oakland
+      - Berkeley
+      - Alameda
+      - Emeryville
+      - Fremont
+      - Hayward
+      - San Leandro
+      - Union City
+      - Newark
+      - Pleasanton
+      - Dublin
+      - Livermore
+      - Walnut Creek
+      - Concord
+      - Richmond
+      - Antioch
+      - Brentwood
+      - Danville
+      - San Ramon
+      - Martinez
+      - Pittsburg
+
+  san_francisco_peninsula:
+    counties: [San Francisco, San Mateo]
+    cities:
+      - San Francisco
+      - Daly City
+      - South San Francisco
+      - San Mateo
+      - Redwood City
+      - Burlingame
+      - San Bruno
+      - Millbrae
+      - Foster City
+      - Menlo Park
+      - Belmont
+      - San Carlos
+      - Pacifica
+
+  silicon_valley:
+    counties: [Santa Clara, Santa Cruz, San Benito]
+    cities:
+      - San Jose
+      - Santa Clara
+      - Sunnyvale
+      - Mountain View
+      - Palo Alto
+      - Cupertino
+      - Milpitas
+      - Campbell
+      - Los Gatos
+      - Saratoga
+      - Morgan Hill
+      - Gilroy
+      - Santa Cruz
+      - Watsonville
+      - Scotts Valley
+      - Hollister
+
+  central_coast:
+    counties: [Monterey, San Luis Obispo, Santa Barbara]
+    cities:
+      - Salinas
+      - Monterey
+      - Seaside
+      - Marina
+      - Carmel
+      - Pacific Grove
+      - King City
+      - San Luis Obispo
+      - Paso Robles
+      - Atascadero
+      - Arroyo Grande
+      - Pismo Beach
+      - Santa Barbara
+      - Santa Maria
+      - Goleta
+      - Lompoc
+      - Carpinteria
+
+  central_valley:
+    counties: [San Joaquin, Stanislaus, Merced, Madera, Fresno, Kings, Tulare, Kern]
+    cities:
+      - Stockton
+      - Tracy
+      - Manteca
+      - Lodi
+      - Modesto
+      - Turlock
+      - Ceres
+      - Merced
+      - Los Banos
+      - Madera
+      - Fresno
+      - Clovis
+      - Hanford
+      - Lemoore
+      - Visalia
+      - Tulare
+      - Porterville
+      - Bakersfield
+      - Delano
+      - Ridgecrest
+
+  los_angeles:
+    counties: [Los Angeles, Ventura]
+    cities:
+      - Los Angeles
+      - Long Beach
+      - Glendale
+      - Pasadena
+      - Santa Monica
+      - Torrance
+      - Burbank
+      - El Segundo
+      - Culver City
+      - Inglewood
+      - Downey
+      - Norwalk
+      - Whittier
+      - Pomona
+      - Santa Clarita
+      - Lancaster
+      - Palmdale
+      - Carson
+      - Gardena
+      - Hawthorne
+      - Redondo Beach
+      - Manhattan Beach
+      - Beverly Hills
+      - West Hollywood
+      - Woodland Hills
+      - Van Nuys
+      - Sherman Oaks
+      - Monterey Park
+      - Alhambra
+      - Arcadia
+      - El Monte
+      - Covina
+      - West Covina
+      - Cerritos
+      - Lakewood
+      - Compton
+      - Ventura
+      - Oxnard
+      - Thousand Oaks
+      - Simi Valley
+      - Camarillo
+
+  orange_county:
+    counties: [Orange]
+    cities:
+      - Anaheim
+      - Santa Ana
+      - Irvine
+      - Huntington Beach
+      - Garden Grove
+      - Orange
+      - Fullerton
+      - Costa Mesa
+      - Mission Viejo
+      - Newport Beach
+      - Brea
+      - Buena Park
+      - Tustin
+      - Yorba Linda
+      - Lake Forest
+      - Laguna Niguel
+      - Laguna Hills
+      - Los Alamitos
+      - Cypress
+      - Westminster
+      - Fountain Valley
+      - Placentia
+      - Aliso Viejo
+      - San Clemente
+      - Dana Point
+      - Rancho Santa Margarita
+
+  inland_empire:
+    counties: [San Bernardino, Riverside]
+    cities:
+      - Riverside
+      - San Bernardino
+      - Ontario
+      - Rancho Cucamonga
+      - Fontana
+      - Corona
+      - Moreno Valley
+      - Temecula
+      - Murrieta
+      - Chino
+      - Chino Hills
+      - Upland
+      - Redlands
+      - Victorville
+      - Hesperia
+      - Palm Springs
+      - Palm Desert
+      - Indio
+      - Hemet
+      - Menifee
+      - Eastvale
+      - Jurupa Valley
+      - Rialto
+      - Colton
+      - Yucaipa
+
+  san_diego_imperial:
+    counties: [San Diego, Imperial]
+    cities:
+      - San Diego
+      - Chula Vista
+      - Oceanside
+      - Escondido
+      - Carlsbad
+      - El Cajon
+      - Vista
+      - San Marcos
+      - Encinitas
+      - National City
+      - La Mesa
+      - Santee
+      - Poway
+      - Coronado
+      - Solana Beach
+      - Del Mar
+      - Imperial Beach
+      - Chula Vista
+      - El Centro
+      - Calexico
+      - Brawley

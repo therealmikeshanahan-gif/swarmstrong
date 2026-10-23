@@ -1,0 +1,78 @@
+# Local parts that are front-desk inboxes, not people.
+#
+# Rejecting these when BUILDING a list is the single rule that would have
+# prevented the OC-LA Property Managers result: 259 emails sent to addresses
+# like info@example-propmgmt.com and management@example-realty2.com, 0 human replies.
+#
+# NOTE — this applies to list building only. Never suppress an inbound REPLY
+# because it came from a role address: info@example-church.org sent one of the
+# highest-intent replies the grant campaign ever got. At a 4-person church a
+# human reads info@; at a 50-person management firm nobody does.
+#
+# Tiers A-D (institutional through multifamily): reject these outright.
+# Tier E (boutique / 1-10 properties, often an owner-operator): a role address
+# may be the only address there is. Flag, allow, and send a Tier-E variant.
+
+info
+information
+admin
+administration
+administrator
+office
+contact
+contactus
+hello
+hi
+help
+support
+sales
+leasing
+lease
+rentals
+rent
+management
+manager
+propertymanagement
+frontdesk
+reception
+inquiries
+inquiry
+enquiries
+general
+mail
+email
+team
+staff
+hr
+jobs
+careers
+recruiting
+accounting
+accounts
+ap
+ar
+billing
+invoices
+payables
+receivables
+noreply
+no-reply
+donotreply
+do-not-reply
+postmaster
+mailer-daemon
+webmaster
+abuse
+marketing
+media
+press
+newsletter
+subscribe
+unsubscribe
+service
+services
+customerservice
+maintenance
+work
+workorders
+repairs

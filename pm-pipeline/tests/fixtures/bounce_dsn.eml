@@ -1,0 +1,11 @@
+From: MAILER-DAEMON@mx.example.com
+To: sender1@example-outreach.com
+Subject: Undeliverable: Who handles entry glass maintenance?
+Date: Mon, 12 Oct 2026 16:02:00 +0000
+Content-Type: multipart/report; report-type=delivery-status; boundary="b1"
+
+--b1
+Content-Type: text/plain
+
+Your message could not be delivered. 550 5.1.1 Address not found.
+--b1--

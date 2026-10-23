@@ -1,0 +1,5 @@
+out/*.csv
+__pycache__/
+*.pyc
+.pytest_cache/
+config/identities.yml

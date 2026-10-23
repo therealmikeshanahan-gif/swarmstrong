@@ -1,0 +1,34 @@
+# Every address and domain we send from. The reply watcher treats mail from any
+# of these as OUTBOUND and will never alert on it.
+#
+# This file is the fix for the Oct 12 false alerts, where the watcher logged our
+# own step-4 follow-up as a prospect reply. Add a domain here the same day you
+# add it to Instantly, or the false alerts come back.
+
+owned_domains:
+  - example-outreach.com
+  - example-grants.com
+  - example-main.com
+
+owned_addresses:
+  # cold-outreach mailboxes
+  - sender1@example-outreach.com
+  - sender2@example-outreach.com
+  - sender3@example-outreach.com
+  - persona@example-grants.com
+  - alerts@example-grants.com
+  # personal / internal — these show up in forwarded threads
+  - owner1@example-personal.com
+  - owner2@example-personal.com
+  - owner3@example-personal.com
+  - caller2@example-personal.com
+  - caller1@example-personal.com
+  - caller3@example-personal.com
+
+# Phrases that only ever appear in OUR copy. Backstop for the case where a
+# forward or a misconfigured mailbox strips the real From header.
+own_content_markers:
+  - "CA Contractor License #000000"
+  - "Reply \"no thanks\" to opt out"
+  - "1 Example Blvd, Suite 100"
+  - "Last follow-up from me"

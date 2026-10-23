@@ -1,0 +1,50 @@
+{
+  "autoreply_ooo.eml": {
+    "alert": false,
+    "kind": "autoreply",
+    "optOut": false,
+    "responder": "pm@example-realty.com"
+  },
+  "bounce_dsn.eml": {
+    "alert": false,
+    "kind": "bounce",
+    "optOut": false,
+    "responder": "mailer-daemon@mx.example.com"
+  },
+  "forwarded_alert_internal.eml": {
+    "alert": false,
+    "kind": "outbound_self",
+    "optOut": false,
+    "responder": "alerts@example-grants.com"
+  },
+  "outbound_step4_a.eml": {
+    "alert": false,
+    "kind": "outbound_self",
+    "optOut": false,
+    "responder": "sender1@example-outreach.com"
+  },
+  "outbound_step4_b.eml": {
+    "alert": false,
+    "kind": "outbound_self",
+    "optOut": false,
+    "responder": "sender3@example-outreach.com"
+  },
+  "reply_from_role_inbox.eml": {
+    "alert": true,
+    "kind": "human_reply",
+    "optOut": false,
+    "responder": "info@example-church.org"
+  },
+  "reply_named_person.eml": {
+    "alert": true,
+    "kind": "human_reply",
+    "optOut": false,
+    "responder": "dmorales@example-temple.org"
+  },
+  "reply_optout.eml": {
+    "alert": true,
+    "kind": "human_reply",
+    "optOut": true,
+    "responder": "drivera@example-bindery.com"
+  }
+}
